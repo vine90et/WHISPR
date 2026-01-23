@@ -1,0 +1,22 @@
+{
+  "name": "whispr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build" : "npm install --prefix Backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix Backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vine90et/WHISPR.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vine90et/WHISPR/issues"
+  },
+  "homepage": "https://github.com/vine90et/WHISPR#readme"
+}
