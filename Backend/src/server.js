@@ -3,11 +3,13 @@ import express from "express";
 import path from "path";
 import authRoute from "./Routes/Auth.Route.js"
 import { connectdb } from "./lib/db.js";
+import cookieParser from "cookie-parser"
 import { ENV } from "./lib/env.js";
 
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser())
 const __dirname = path.resolve();
 
 const PORT = ENV.PORT || 3000;
