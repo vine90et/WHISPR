@@ -9,12 +9,15 @@ export const useChatStore = create((set,get) =>({
     selectedUser: null,
     isUserLoading: false,
     isMessageLoading: false,
-    isSoundEnabled: localStorage.getItem("isSoundEnabled") === true,
+    isSoundEnabled: JSON.parse(localStorage.getItem("isSoundEnabled") || "true"),
+    onlineUsers: [],
 
-    toggelItem: ()=>{
-        localStorage.getItem("isSoundEnabled", !get().isSoundEnabled)
-        set({isSoundEnabled: !get().isSoundEnabled})
+    toggleItem: () => {
+        const newValue = !get().isSoundEnabled;
+        localStorage.setItem("isSoundEnabled", JSON.stringify(newValue));
+        set({ isSoundEnabled: newValue });
     },
+
 
     setActiveTab: (tab)=> set({activeTab: tab}),
     setSelectedUser: (selectedUser)=> set({selectedUser}),
@@ -41,5 +44,5 @@ export const useChatStore = create((set,get) =>({
         }finally{
             set({isUserLoading: false});
         }
-    }
+    },
 })) 

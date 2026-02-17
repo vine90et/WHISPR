@@ -13,7 +13,7 @@ route.post("/login", login);
 
 route.post("/logout", logout);
 
-route.put("/update", protectRoute, updateProfile);
+route.put("/update-profile", protectRoute, updateProfile);
 
 route.get("/check", protectRoute, (req,res)=> res.status(200).json(req.user));
 
