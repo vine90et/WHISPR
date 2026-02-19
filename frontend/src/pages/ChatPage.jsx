@@ -15,15 +15,27 @@ const ChatPage = () => {
     <div className='relative w-full max-w-6xl h-[800px] '>
       <BoarderAnimatedContainer>
         {/*LEFT SIDE */}
-        <div className='w-80 bg-slate-800/50 backdrop-blur-sm flex flex-col '>
+        <div className={`
+              ${selectedUser ? "hidden md:flex" : "flex"}
+              w-full md:w-80
+              bg-slate-800/50
+              backdrop-blur-sm
+              flex-col
+            `}>
           <ProfileHeader />
           <ActiveTabSwitch />
           <div className='flex-1 overflow-y-auto p-4 space-y-4'> 
             {activeTab === "Chats" ? <ChatsList /> : <ContactList />}
           </div>
-        </div>
+        </div> 
+        
         {/*RIGHT SIDE*/}
-        <div className='flex-1 flex flex-col bg-slate-900/50 backdrop-blur-sm '>
+        <div className={`
+              ${selectedUser ? "flex" : "hidden md:flex"}
+              flex-1
+              flex-col
+              bg-slate-900/50
+              backdrop-blur-sm`} >
           {selectedUser ? <ChatContainer />: <NoConversationPlaceHolder />}
         </div>
       </BoarderAnimatedContainer>
