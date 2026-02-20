@@ -23,7 +23,7 @@ const ContactList = () => {
         >
           <div className="flex items-center gap-3">
             {/*MAKE IT WORK WITH SOCKET IO */}
-            <div className={`avatar $"{"onlineUsers.includes(contact._id) ? "online" : "offline"}`}>
+            <div className={`avatar ${onlineUsers.includes(contact._id) ? "online" : "offline"}`}>
               <div className="size-12 rounded-full">
                 <img src={contact.profilePic || "/avatar.png"} />
               </div>

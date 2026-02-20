@@ -7,9 +7,9 @@ import { connectdb } from "./lib/db.js";
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import { ENV } from "./lib/env.js";
+import { app, server } from "./lib/socket.js";
 
 
-const app = express();
 app.use(cors({origin:ENV.CLIENT_URL, credentials: true}))
 app.use(express.json({limit:"15mb"}));
 app.use(express.urlencoded({extended: true, limit: "15mb"}))
@@ -30,7 +30,7 @@ if(ENV.NODE_ENV === "production"){
     })
 }
 
-app.listen(PORT, ()=> {
+server.listen(PORT, ()=> {
     console.log('✅ app is running on port: ',PORT);
     connectdb();
 });
