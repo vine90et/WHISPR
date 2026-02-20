@@ -43,7 +43,7 @@ export const sendMessage = async (req,res)=>{
             return res.status(400).json({message: "❌ Text and image is required" });
         }
 
-        if(senderId.equals(recieverId)){
+        if(senderId.toString() === recieverId.toString()){
             return res.status(400).json({message:"❌ Cannot send a messgage to yourself"});
         }
 
