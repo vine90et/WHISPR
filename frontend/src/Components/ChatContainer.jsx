@@ -1,14 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useChatStore } from '../Store/UseChatStore'
 import { useAuthStore } from '../Store/UseAuthStore';
 import ChatHeader from './ChatHeader';
 import NoChatHistoryPlaceHolder from './NoChatHistoryPlaceHolder';
 import Loader from "./Loader"
 import MessageLoadingSkeleton from './MessageLoadingSkeleton';
+import MessageInput from './MessageInput';
 
 const ChatContainer = () => {
   const {messages, selectedUser, getMessagesByUserId, isMessageLoading} = useChatStore();
   const {authUser} = useAuthStore();
+  const messageEndRef = useRef(null);
+
+  useEffect(() => {
+    if(messageEndRef.current){
+      messageEndRef.current.scrollIntoView({behaviour: "smooth"})
+    }
+  }, [messages])
+  
 
   useEffect(() => {
     if (!selectedUser?._id) return;
@@ -34,10 +43,16 @@ const ChatContainer = () => {
                       <img src={msg.image} alt="shared" className='rounded-lg h-48 object-cover'  />
                     )}
                     {msg.text && <p className='mt-2'>{msg.text}</p>}
-                    <p className={`text-xs mt-1 opacity-75 flex items-center gap-1 ${msg.senderId === authUser?._id ? "justify-end" :"justify-start"}`}>{new Date(msg.createdAt).toISOString().slice(11,16)}</p>
+                    <p className={`text-xs mt-1 opacity-75 flex items-center gap-1 ${msg.senderId === authUser?._id ? "justify-end" :"justify-start"}`}>
+                      {new Date(msg.createdAt).toLocaleTimeString(undefined,{
+                        "hour":"2-digit",
+                        "minute":"2-digit"
+                      })}
+                    </p>
                   </div>
                 </div>
               ))}
+              <div ref={messageEndRef}/>
             </div>
           ) :isMessageLoading ? <MessageLoadingSkeleton />
           :(
@@ -45,6 +60,7 @@ const ChatContainer = () => {
           )
         }
       </div>
+      <MessageInput />
     </>
   )
 }
