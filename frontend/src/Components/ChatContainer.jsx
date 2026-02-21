@@ -8,27 +8,30 @@ import MessageLoadingSkeleton from './MessageLoadingSkeleton';
 import MessageInput from './MessageInput';
 
 const ChatContainer = () => {
-  const {messages, selectedUser, getMessagesByUserId, isMessageLoading} = useChatStore();
+  const {messages, selectedUser, getMessagesByUserId, isMessageLoading, subscribeToMessage, unSubscribeToMessages} = useChatStore();
   const {authUser} = useAuthStore();
   const messageEndRef = useRef(null);
 
   useEffect(() => {
     if(messageEndRef.current){
-      messageEndRef.current.scrollIntoView({behaviour: "smooth"})
+      messageEndRef.current.scrollIntoView({behavior: "smooth"})
     }
   }, [messages])
   
 
   useEffect(() => {
     if (!selectedUser?._id) return;
-    getMessagesByUserId(selectedUser._id)
-    console.log(selectedUser)
+    getMessagesByUserId(selectedUser._id);
+    
+    subscribeToMessage();
+
+    return () => unSubscribeToMessages();
   }, [selectedUser._id])
   
   return (
     <>
       <ChatHeader />
-      <div className='flex-1 px-6 overflow-y-auto py-8'>
+      <div className='chat-scroll flex-1 px-6 overflow-y-auto py-8'>
           {messages.length > 0 && !isMessageLoading
           ?(
             <div className='max-w-3xl mx-auto space-y-6'>

@@ -12,7 +12,7 @@ import ChatsList from '../Components/ChatsList'
 const ChatPage = () => {
   const {activeTab, selectedUser} = useChatStore();
   return (
-    <div className='relative w-full max-w-6xl h-[800px] '>
+    <div className='relative w-full max-w-6xl h-[650px] '>
       <BoarderAnimatedContainer>
         {/*LEFT SIDE */}
         <div className={`
@@ -24,7 +24,7 @@ const ChatPage = () => {
             `}>
           <ProfileHeader />
           <ActiveTabSwitch />
-          <div className='flex-1 overflow-y-auto p-4 space-y-4'> 
+          <div className='chat-scroll flex-1 overflow-y-auto p-4 space-y-4'> 
             {activeTab === "Chats" ? <ChatsList /> : <ContactList />}
           </div>
         </div> 
@@ -32,6 +32,7 @@ const ChatPage = () => {
         {/*RIGHT SIDE*/}
         <div className={`
               ${selectedUser ? "flex" : "hidden md:flex"}
+              flex
               flex-1
               flex-col
               bg-slate-900/50
