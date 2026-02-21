@@ -8,7 +8,40 @@
   syntax: "<angle>";
 }
 
+
 @layer components {
+
+    .sidebar-scroll::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .sidebar-scroll::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 9999px;
+    }
+
+    /* Firefox */
+    .sidebar-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: #475569 transparent;
+    }
+
+  .chat-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chat-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+  }
+
+  .chat-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.4);
+  }
 
   .input {
     @apply w-full bg-slate-800/50 border border-slate-700 rounded-lg py-2 pl-10 pr-4 text-slate-200 placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent;
@@ -33,5 +66,4 @@
   .auth-link {
     @apply px-4 py-2 inline-block bg-cyan-500/10 rounded-lg text-cyan-400 hover:text-cyan-500 text-sm transition-colors;
   }
-
 }

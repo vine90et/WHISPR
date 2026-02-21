@@ -1,6 +1,7 @@
 import cloudinary from "../lib/cloudinary.js";
 import User from "../models/User.Modle.js";
 import Message from "../models/message.moddel.js"
+import {getRecieverSocketId, io} from "../lib/socket.js"
 
 export const getAllContacts = async(req,res)=>{
     try {
@@ -63,9 +64,15 @@ export const sendMessage = async (req,res)=>{
             image: imageUrl,
         });
         
+        await newMessage.save();
 
         //todo:send message in real time
-        await newMessage.save();
+        const receiverSocketIds  =  getRecieverSocketId(recieverId)
+        if(receiverSocketIds ){
+            receiverSocketIds.forEach((socketId)=>{
+                io.to(socketId).emit("newMessage", newMessage)
+            })
+        }
         res.status(201).json(newMessage);
     } catch (error) {
         console.log("Error in send Message Controller", error);

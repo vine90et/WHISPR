@@ -35,9 +35,12 @@ const ChatHeader = () => {
         </div>
         </div>
 
-        <button onClick={()=> setSelectedUser(null) }>
-            <XIcon className='w-5 h-5 text-slate-400 hover:text-slate-200 transition-colors cursor-pointer ' />
-        </button>
+        <button
+  onClick={() => setSelectedUser(null)}
+  className="p-2 rounded-full mx-2 bg-slate-700/50 hover:bg-slate-600/70 transition-all duration-200"
+>
+  <XIcon className="w-5 h-5 text-slate-200 hover:text-white" />
+</button>
         
     </div>
   )
